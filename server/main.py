@@ -1,12 +1,21 @@
 import os
+import sys
+from rich import print
+from modules import server
+from tools import help_tools
+
+args = sys.argv
 
 
-class Host:
-    def __init__(self, hostname: str = ''):
-        self.host_name = hostname or f'{os.getlogin()}'
+def main():
+    cwd = os.getcwd()
+    if len(args) < 2:
+        print(help_tools.global_help)
+        return
+    if args[1] == 'share':
+        host = server.Server()
+        host.run()
 
-    def run(self, port: 8888):
-        pass
 
-
-host = Host()
+if __name__ == '__main__':
+    main()
