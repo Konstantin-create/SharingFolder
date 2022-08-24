@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da189638-c2fd-48f2-8e84-3a4df0cd3ad8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/server/modules/server.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/tools/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/tools/help_tools.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/app/modules/server.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/app/tools/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/app/tools/screen_tools.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/modules/server.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/share.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/tools/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/tools/help_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/tools/help_tools.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +43,11 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/server/app" />
+    </key>
+  </component>
   <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="SharingFolder" />
@@ -54,7 +61,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/server/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/server/app/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />

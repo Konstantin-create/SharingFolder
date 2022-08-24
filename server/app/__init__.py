@@ -1,8 +1,8 @@
 import os
 import sys
 from rich import print
-from modules import server
-from tools import help_tools
+from .modules import server
+from .tools import help_tools
 
 args = sys.argv
 
@@ -17,5 +17,4 @@ def main():
         host.run()
 
 
-if __name__ == '__main__':
-    main()
+main()
