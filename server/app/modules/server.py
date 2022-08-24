@@ -1,6 +1,6 @@
 import socket
 from rich import print
-from ..tools import clear_screen
+from ..tools import clear_screen, parse_package
 
 
 class Server:
@@ -9,9 +9,12 @@ class Server:
         self.PORT = port
 
     def run(self, accept_all: bool = False):
+        """Run function. Start server"""
+
         while True:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 s.bind((self.HOST, self.PORT))
+                clear_screen()
                 print('[green] Initialize server[/green]')
                 s.listen()
                 conn, addr = s.accept()
@@ -30,5 +33,11 @@ class Server:
                         data = conn.recv(1024).decode()
                         if not data:
                             break
-                        print(data)
+                        self.package_parser(data)
                 s.close()
+
+    def package_parser(self, data):
+        """Function to parse data and call routing functions"""
+
+        package = parse_package(data)
+        print(package)
