@@ -27,8 +27,8 @@ def main():
                 print('[red]Argument error. Ip field not found[/red]')
                 return
             ip = args[args.index(ip_flag) + 1]
-            if not check_ip(ip):
-                print(f'[red]Ip {ip} is not exists[/red]')
+            if not is_ip(ip):
+                print(f'[red]Ip {ip} is not ip address[/red]')
                 return
             connection = Connection(ip)
             connection.start()
