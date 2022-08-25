@@ -1,6 +1,10 @@
 import sys
 from rich import print
+
+from .tools import *
 from .tools.help_tools import *
+
+from .modules import *
 
 args = sys.argv
 
@@ -23,7 +27,11 @@ def main():
                 print('[red]Argument error. Ip field not found[/red]')
                 return
             ip = args[args.index(ip_flag) + 1]
-            print(ip)
+            if not check_ip(ip):
+                print(f'[red]Ip {ip} is not exists[/red]')
+                return
+            connection = Connection(ip)
+            connection.start()
 
 
 main()

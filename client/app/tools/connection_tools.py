@@ -1,4 +1,5 @@
 import socket
+import requests
 
 
 def is_ip(ip):
@@ -9,4 +10,11 @@ def is_ip(ip):
         return False
 
 
-print(is_ip('129.23.212.2'))
+def check_ip(ip):
+    if not is_ip(ip):
+        return False
+    try:
+        requests.get(f'http://{ip}:8888', timeout=5)
+        return True
+    except:
+        return False

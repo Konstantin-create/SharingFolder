@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da189638-c2fd-48f2-8e84-3a4df0cd3ad8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/app/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/tools/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/tools/connection_tools.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/tools/help_tools.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/client.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/app/modules/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/app/modules/connection_command.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app/tools/help_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/tools/help_tools.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/client/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/app/tools/connection_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/client/app/tools/connection_tools.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
