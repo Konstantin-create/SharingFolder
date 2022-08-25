@@ -4,9 +4,13 @@ from ..tools import clear_screen, parse_package
 
 
 class Server:
+    __slots__ = ('HOST', 'PORT', 'conn', 'addr')
+
     def __init__(self, host: str = '0.0.0.0', port: int = 8888):
         self.HOST = host
         self.PORT = port
+        self.conn = None
+        self.addr = ()
 
     def run(self, accept_all: bool = False):
         """Run function. Start server"""
@@ -17,27 +21,36 @@ class Server:
                 clear_screen()
                 print('[green] Initialize server[/green]')
                 s.listen()
-                conn, addr = s.accept()
-                print(f'[yellow] Incoming connection: {addr}[/yellow]')
+                self.conn, self.addr = s.accept()
+                print(f'[yellow] Incoming connection: {self.addr}[/yellow]')
                 if not accept_all:
-                    command = input(f'Accept connection from {addr[0]}:{addr[1]}?\n  Yes/No: ')
+                    command = input(f'Accept connection from {self.addr[0]}:{self.addr[1]}?\n  Yes/No: ')
                     if 'n' in command.lower():
-                        conn.close()
+                        self.conn.close()
                         clear_screen()
                         continue
 
-                with conn:
+                with self.conn:
                     clear_screen()
-                    print(f'[green] Shared with {addr[0]}[/green]')
+                    print(f'[green] Shared with {self.addr[0]}[/green]')
                     while True:
-                        data = conn.recv(1024).decode()
+                        data = self.conn.recv(1024).decode()
                         if not data:
                             break
-                        self.package_parser(data)
+                        self.router(data)
                 s.close()
 
-    def package_parser(self, data):
-        """Function to parse data and call routing functions"""
+    def router(self, data) -> None:
+        """Function to parse data and routing packages"""
 
         package = parse_package(data)
-        print(package)
+        print(package['url'] == '/login')
+        if package['url'] == '/login':
+            self.login_route(package)
+
+    def login_route(self, package: dict):
+        if 'json' not in package:
+            self.conn.send(str({'code': 400}).encode())
+            self.conn.close()
+            return
+        self.conn.send(str({'code': 200, 'token': 'fadjnadsdneo'}).encode())
