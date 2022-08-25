@@ -1,2 +1,2 @@
 # SharingFolder
-Just an util which can create a global folder for two remote servers
+Just an util which can create a global folder for two remote servers worked on sockets
