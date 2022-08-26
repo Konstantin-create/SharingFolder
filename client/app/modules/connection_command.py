@@ -1,7 +1,6 @@
 import sys
 import json
 import socket
-from datetime import datetime
 from rich import print
 
 
@@ -16,6 +15,8 @@ class Connection:
         self.token = ''
 
     def is_authorized(self) -> bool:
+        """Check is user authorized"""
+
         if not self.token:
             return False
         return True  # todo token validation
