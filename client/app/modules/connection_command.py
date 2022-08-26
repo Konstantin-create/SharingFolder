@@ -1,7 +1,7 @@
 import sys
 import json
 import socket
-import requests
+from datetime import datetime
 from rich import print
 
 
@@ -10,45 +10,36 @@ class Connection:
 
     def __init__(self, ip: str, port: int = 8888):
         self.ip = ip
-        self.hostname = socket.gethostname()
         self.port = port
+        self.hostname = socket.gethostname()
         self.conn = None
-        self.token = None
-
-    def post(self, url: str, package: dict) -> dict:
-        """Function to post package and get json back"""
-
-        try:
-            response = json.loads(requests.post(f'http://{self.ip}:{self.port}/{url}', json=package).text)
-            print(response)
-            return response
-        except Exception as e:
-            print(f'[red]An error occurred: {e}[/red]')
-            sys.exit()
+        self.token = ''
 
     def is_authorized(self) -> bool:
-        """Function to check is user authorized"""
+        if not self.token:
+            return False
+        return True  # todo token validation
 
-        if self.token:
-            response = self.post('is-authorized', {'token': self.token})
-            if response['code'] == 200 and response['is_authorized']:
-                return True
-        return False
+    def post(self, url: str, package: dict) -> dict:
+        """Function to send post request"""
+
+        package['url'] = url
+        self.conn.sendall(bytes(json.dumps(package), encoding="utf-8"))
+        response = self.conn.recv(1024).decode('utf-8')
+        if not response or response['code'] == 400:
+            print('[red]An server error occurred. Try next time later[/red]')
 
     def start(self):
         """Function to start connection"""
 
-        self.login()
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as self.conn:
+            self.conn.connect((self.ip, self.port))
+            self.login()
 
     def login(self):
-        """Function to log in user"""
+        """Login function"""
 
         if self.is_authorized():
-            print('authorized')  # todo
+            self.conn.close()
             return
-        response = self.post('login', {"hostname": self.hostname})
-        print(response)
-
-        if response['code'] == 200:
-            self.token = response['token']
-        print(self.token)
+        print(self.post('/login', {'hostname': self.hostname}))

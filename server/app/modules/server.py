@@ -1,3 +1,4 @@
+import json
 import socket
 from rich import print
 from datetime import datetime
@@ -36,18 +37,16 @@ class Server:
         """Function to parse data and routing packages"""
 
         package = parse_package(data)
+        if not package:
+            self.conn.sendall(bytes(json.dumps({'code': 400}), encoding='utf-8'))
         if package['url'] == '/login':
             self.login_route(package)
 
     def login_route(self, package: dict):
-        if 'json' not in package:
-            self.conn.sendall(str({'code': 400}).encode())
-            self.conn.close()
-            return
         key = generate_key(
             {'ip': self.addr[0],
-             'hostname': package['json']['hostname'],
+             'hostname': package['hostname'],
              'time_stamp': datetime.utcnow()
              })
         response = {'code': 200, 'token': key}
-        self.conn.sendall(str(response).encode())
+        self.conn.sendall(bytes(json.dumps(response), encoding='utf-8'))
