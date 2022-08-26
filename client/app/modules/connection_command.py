@@ -25,9 +25,11 @@ class Connection:
 
         package['url'] = url
         self.conn.sendall(bytes(json.dumps(package), encoding="utf-8"))
-        response = self.conn.recv(1024).decode('utf-8')
+        response = json.loads(self.conn.recv(1024).decode('utf-8'))
         if not response or response['code'] == 400:
             print('[red]An server error occurred. Try next time later[/red]')
+            sys.exit()
+        return response
 
     def start(self):
         """Function to start connection"""

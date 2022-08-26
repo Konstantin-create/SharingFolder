@@ -43,10 +43,16 @@ class Server:
             self.login_route(package)
 
     def login_route(self, package: dict):
+        print(str(
+            {'ip': self.addr[0],
+             'hostname': package['hostname'],
+             'time_stamp': str(datetime.utcnow())
+             }
+        ))
         key = generate_key(
             {'ip': self.addr[0],
              'hostname': package['hostname'],
-             'time_stamp': datetime.utcnow()
+             'time_stamp': str(datetime.utcnow())
              })
         response = {'code': 200, 'token': key}
         self.conn.sendall(bytes(json.dumps(response), encoding='utf-8'))
