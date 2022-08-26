@@ -19,8 +19,9 @@ class Connection:
         """Function to post package and get json back"""
 
         try:
-            print(str(package))
-            return json.loads(requests.post(f'http://{self.ip}:{self.port}/{url}', json=package).text)
+            response = json.loads(requests.post(f'http://{self.ip}:{self.port}/{url}', json=package).text)
+            print(response)
+            return response
         except Exception as e:
             print(f'[red]An error occurred: {e}[/red]')
             sys.exit()
@@ -43,9 +44,11 @@ class Connection:
         """Function to log in user"""
 
         if self.is_authorized():
-            pass  # todo
-        else:
-            response = self.post('login', {"hostname": self.hostname})
-            print(response)
-            if response['code'] == 200:
-                self.token = response['token']
+            print('authorized')  # todo
+            return
+        response = self.post('login', {"hostname": self.hostname})
+        print(response)
+
+        if response['code'] == 200:
+            self.token = response['token']
+        print(self.token)

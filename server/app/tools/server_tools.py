@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 
 
 def parse_package(package: str) -> dict | None:
@@ -42,3 +43,9 @@ def _post_package(package) -> dict:
         'user_agent': package[2].split()[1],
         'json': json.loads(package[-1])
     }
+
+
+def generate_key(client_data: dict):
+    """Function to generate """
+
+    return hashlib.sha256(str(client_data).encode()).hexdigest()

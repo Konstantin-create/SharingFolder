@@ -1,6 +1,7 @@
 import socket
 from rich import print
-from ..tools import clear_screen, parse_package
+from datetime import datetime
+from ..tools import clear_screen, parse_package, generate_key
 
 
 class Server:
@@ -40,7 +41,13 @@ class Server:
 
     def login_route(self, package: dict):
         if 'json' not in package:
-            self.conn.send(str({'code': 400}).encode())
+            self.conn.sendall(str({'code': 400}).encode())
             self.conn.close()
             return
-        self.conn.send(str({'code': 200, 'token': package['json']['hostname']}).encode())
+        key = generate_key(
+            {'ip': self.addr[0],
+             'hostname': package['json']['hostname'],
+             'time_stamp': datetime.utcnow()
+             })
+        response = {'code': 200, 'token': key}
+        self.conn.sendall(str(response).encode())
