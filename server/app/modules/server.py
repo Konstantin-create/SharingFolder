@@ -31,16 +31,9 @@ class Server:
             with self.conn:
                 while True:
                     data = self.conn.recv(3072).decode()
-                    print(data)
-                    if not data:
-                        print('[yellow]Got empty package[/yellow]')
-                        command = input('Exit? yes/no: ')
-                        if 'y' in command:
-                            break
-                        else:
-                            continue
-                    self.router(data)
-            s.close()
+                    if data:
+                        self.router(data)
+            # s.close()
 
     def router(self, data) -> None:
         """Function to parse data and routing packages"""

@@ -24,8 +24,7 @@ class Connection:
     def post(self, url: str, package: dict) -> dict:
         """Function to send post request"""
 
-        print(package)
-        print(url)
+        print(bytes(json.dumps(package), encoding="utf-8"))
         package['url'] = url
         self.conn.sendall(bytes(json.dumps(package), encoding="utf-8"))
         response = json.loads(self.conn.recv(3072).decode('utf-8'))
