@@ -1,8 +1,9 @@
 import socket
-import requests
 
 
-def is_ip(ip):
+def is_ip(ip: str) -> bool:
+    """Function to check is string ip"""
+
     try:
         socket.inet_aton(ip)
         return True

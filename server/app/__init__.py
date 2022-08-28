@@ -13,7 +13,7 @@ def main():
         print(help_tools.global_help)
         return
     if args[1] == 'share':
-        host = server.Server()
+        host = server.Server(working_dir=cwd)
         host.run()
 
 

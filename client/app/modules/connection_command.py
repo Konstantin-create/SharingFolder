@@ -43,6 +43,13 @@ class Connection:
         """Login function"""
 
         if self.is_authorized():
-            self.conn.close()
+            self.get_hashes()
+        self.token = self.post('/login', {'hostname': self.hostname})
+
+    def get_hashes(self):
+        """Get files hashes functions"""
+
+        if not self.is_authorized():
+            self.login()
             return
-        print(self.post('/login', {'hostname': self.hostname}))
+        self.post('/get-hashes', {'token': self.token})
