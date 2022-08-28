@@ -31,6 +31,3 @@ def get_file_hashes(working_dir: str) -> list:
         file_data_hash = generate_hash(open(f'{working_dir}/{file}', 'rb').read())
         output.append({file: [filename_hash, file_data_hash]})
     return output
-
-
-print(get_file_hashes('/home/hacknet/Kostua/Flask/hacknet_web'))

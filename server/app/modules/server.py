@@ -30,9 +30,15 @@ class Server:
 
             with self.conn:
                 while True:
-                    data = self.conn.recv(1024).decode()
+                    data = self.conn.recv(3072).decode()
+                    print(data)
                     if not data:
-                        break
+                        print('[yellow]Got empty package[/yellow]')
+                        command = input('Exit? yes/no: ')
+                        if 'y' in command:
+                            break
+                        else:
+                            continue
                     self.router(data)
             s.close()
 
@@ -44,8 +50,8 @@ class Server:
             self.conn.sendall(bytes(json.dumps({'code': 400}), encoding='utf-8'))
         if package['url'] == '/login':
             self.login_route(package)
-        elif package['url'] == '/get-hashes':
-            self.get_hashes(package=package)
+        elif package['url'] == '/get_hashes':
+            self.get_hashes_route(package=package)
 
     def login_route(self, package: dict):
         """Function of login route"""
@@ -65,7 +71,7 @@ class Server:
         response = {'code': 200, 'token': key}
         self.conn.sendall(bytes(json.dumps(response), encoding='utf-8'))
 
-    def get_hashes_routes(self, package: dict):
+    def get_hashes_route(self, package: dict):
         """Function to get current hashes"""
 
-        get_file_hashes()
+        self.conn.sendall(bytes(json.dumps(get_file_hashes(self.working_dir)), encoding='utf-8'))

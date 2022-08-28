@@ -24,9 +24,11 @@ class Connection:
     def post(self, url: str, package: dict) -> dict:
         """Function to send post request"""
 
+        print(package)
+        print(url)
         package['url'] = url
         self.conn.sendall(bytes(json.dumps(package), encoding="utf-8"))
-        response = json.loads(self.conn.recv(1024).decode('utf-8'))
+        response = json.loads(self.conn.recv(3072).decode('utf-8'))
         if not response or response['code'] == 400:
             print('[red]An server error occurred. Try next time later[/red]')
             sys.exit()
@@ -44,7 +46,7 @@ class Connection:
 
         if self.is_authorized():
             self.get_hashes()
-        self.token = self.post('/login', {'hostname': self.hostname})
+        self.token = self.post('/login', {'hostname': self.hostname})['token']
 
     def get_hashes(self):
         """Get files hashes functions"""
@@ -52,4 +54,4 @@ class Connection:
         if not self.is_authorized():
             self.login()
             return
-        self.post('/get-hashes', {'token': self.token})
+        self.post('/get_hashes', {'token': self.token})
