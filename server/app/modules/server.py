@@ -27,7 +27,6 @@ class Server:
                 s.bind((self.HOST, self.PORT))
                 s.listen()
                 self.conn, self.addr = s.accept()
-                print(f'[yellow] Incoming package: {self.addr}[/yellow]')
 
                 with self.conn:
                     while True:
@@ -43,6 +42,7 @@ class Server:
         package = parse_package(data)
         if not package:
             self.conn.sendall(bytes(json.dumps({'code': 400}), encoding='utf-8'))
+        print(f'[yellow] Incoming package: {self.addr}[/yellow] {package["url"]}')
         if package['url'] == '/login':
             self.login_route(package)
         elif package['url'] == '/get_hashes':
