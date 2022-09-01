@@ -33,14 +33,13 @@ class Server:
                     data = self.conn.recv(3072).decode()
                     if data:
                         self.router(data)
-            # s.close()
 
     def router(self, data) -> None:
         """Function to parse data and routing packages"""
 
         package = parse_package(data)
         if not package:
-            self.conn.sendall(bytes(json.dumps({'code': 400}), encoding='utf-8'))
+            self.conn.send(bytes(json.dumps({'code': 400}), encoding='utf-8'))
         if package['url'] == '/login':
             self.login_route(package)
         elif package['url'] == '/get_hashes':
@@ -62,9 +61,10 @@ class Server:
              })
         self.token = key
         response = {'code': 200, 'token': key}
-        self.conn.sendall(bytes(json.dumps(response), encoding='utf-8'))
+        self.conn.send(bytes(json.dumps(response), encoding='utf-8'))
 
     def get_hashes_route(self, package: dict):
         """Function to get current hashes"""
 
-        self.conn.sendall(bytes(json.dumps(get_file_hashes(self.working_dir)), encoding='utf-8'))
+        print(package)
+        self.conn.send(bytes(json.dumps(get_file_hashes(self.working_dir)), encoding='utf-8'))

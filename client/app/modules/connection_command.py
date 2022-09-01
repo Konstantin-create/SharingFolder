@@ -24,9 +24,8 @@ class Connection:
     def post(self, url: str, package: dict) -> dict:
         """Function to send post request"""
 
-        print(bytes(json.dumps(package), encoding="utf-8"))
         package['url'] = url
-        self.conn.sendall(bytes(json.dumps(package), encoding="utf-8"))
+        self.conn.send(bytes(json.dumps(package), encoding="utf-8"))
         response = json.loads(self.conn.recv(3072).decode('utf-8'))
         if not response or response['code'] == 400:
             print('[red]An server error occurred. Try next time later[/red]')
@@ -53,4 +52,4 @@ class Connection:
         if not self.is_authorized():
             self.login()
             return
-        self.post('/get_hashes', {'token': self.token})
+        print(self.post('/get_hashes', {'token': self.token}))

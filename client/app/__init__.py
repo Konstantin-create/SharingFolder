@@ -32,9 +32,8 @@ def main():
                 return
             connection = Connection(ip)
             connection.start()
-            while True:
-                connection.get_hashes()
-                break
+            connection.get_hashes()
+
 
 
 main()
