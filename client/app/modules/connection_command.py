@@ -1,5 +1,6 @@
 import sys
 import json
+import time
 import socket
 from rich import print
 
@@ -25,19 +26,22 @@ class Connection:
         """Function to send post request"""
 
         package['url'] = url
-        self.conn.send(bytes(json.dumps(package), encoding="utf-8"))
+        self.conn.sendall(bytes(json.dumps(package), encoding="utf-8"))
         response = json.loads(self.conn.recv(3072).decode('utf-8'))
         if not response or response['code'] == 400:
             print('[red]An server error occurred. Try next time later[/red]')
             sys.exit()
+        self.conn.close()
         return response
 
     def start(self):
         """Function to start connection"""
 
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as self.conn:
-            self.conn.connect((self.ip, self.port))
-            self.login()
+        while True:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as self.conn:
+                self.conn.connect((self.ip, self.port))
+                self.login()
+                time.sleep(0.5)
 
     def login(self):
         """Login function"""
@@ -53,3 +57,4 @@ class Connection:
             self.login()
             return
         print(self.post('/get_hashes', {'token': self.token}))
+        sys.exit()

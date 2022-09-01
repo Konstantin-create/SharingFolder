@@ -32,7 +32,7 @@ def main():
                 return
             connection = Connection(ip)
             connection.start()
-            connection.get_hashes()
+            # connection.get_hashes()
 
 
 
