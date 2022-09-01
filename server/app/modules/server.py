@@ -27,7 +27,7 @@ class Server:
                 s.bind((self.HOST, self.PORT))
                 s.listen()
                 self.conn, self.addr = s.accept()
-                print(f'[yellow] Incoming connection: {self.addr}[/yellow]')
+                print(f'[yellow] Incoming package: {self.addr}[/yellow]')
 
                 with self.conn:
                     while True:
@@ -51,12 +51,6 @@ class Server:
     def login_route(self, package: dict):
         """Function of login route"""
 
-        print(str(
-            {'ip': self.addr[0],
-             'hostname': package['hostname'],
-             'time_stamp': str(datetime.utcnow())
-             }
-        ))
         key = generate_key(
             {'ip': self.addr[0],
              'hostname': package['hostname'],
@@ -69,7 +63,6 @@ class Server:
     def get_hashes_route(self, package: dict):
         """Function to get current hashes"""
 
-        print(package)
         file_hashes = get_file_hashes(self.working_dir)
         if not file_hashes:
             self.conn.sendall(bytes(json.dumps({'code': 500}, encoding='utf-8')))
