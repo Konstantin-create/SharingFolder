@@ -1,12 +1,12 @@
-import sys
 from rich import print
 
 from .tools import *
 from .tools.help_tools import *
-
 from .modules import *
 
+# Constants
 args = sys.argv
+cwd = os.getcwd()
 
 
 def main():
@@ -30,10 +30,8 @@ def main():
             if not is_ip(ip):
                 print(f'[red]Ip {ip} is not ip address[/red]')
                 return
-            connection = Connection(ip)
+            connection = Connection(cwd, ip)
             connection.start()
-            # connection.get_hashes()
-
 
 
 main()

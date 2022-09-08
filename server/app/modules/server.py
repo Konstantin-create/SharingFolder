@@ -7,15 +7,28 @@ from ..tools import get_file_hashes
 
 
 class Server:
-    __slots__ = ('working_dir', 'HOST', 'PORT', 'conn', 'addr', 'token')
+    __slots__ = ('working_dir', 'root_folder', 'HOST', 'PORT', 'conn', 'addr', 'token')
 
     def __init__(self, working_dir: str, host: str = '0.0.0.0', port: int = 8888):
+        # File system constants
         self.working_dir = working_dir
+        self.root_folder = working_dir[working_dir.rfind('/') + 1:]
+
+        # Server constants
         self.HOST = host
         self.PORT = port
+
+        # Connection variables
         self.conn = None
         self.addr = ()
         self.token = ''
+
+    def token_validation(self, package: dict):
+        """Function to validate token"""
+
+        if not self.token or 'token' not in package or package['token'] != self.token:
+            return False
+        return True
 
     def run(self, accept_all: bool = False):
         """Run function. Start server"""
@@ -63,8 +76,21 @@ class Server:
     def get_hashes_route(self, package: dict):
         """Function to get current hashes"""
 
+        if not self.token_validation(package):
+            self.conn.sendall(bytes(json.dumps({
+                'code': 600
+            }), encoding='utf-8'))
+
         file_hashes = get_file_hashes(self.working_dir)
         if not file_hashes:
-            self.conn.sendall(bytes(json.dumps({'code': 500}, encoding='utf-8')))
+            self.conn.sendall(bytes(json.dumps({
+                'code': 500
+            }), encoding='utf-8'))
             return
-        self.conn.sendall(bytes(json.dumps({'code': 200, 'hashes': file_hashes}), encoding='utf-8'))
+        self.conn.sendall(
+            bytes(json.dumps({
+                'code': 200,
+                'hashes': file_hashes,
+                'root_folder': self.root_folder
+            }), encoding='utf-8')
+        )

@@ -60,11 +60,12 @@ The connection token is stored in the file `app/data/connection/TOKEN`
 
 ### List of error codes:
 
-| **Code** | **Decryption**                                  |
-|----------|-------------------------------------------------|
-| 200      | Success                                         |
-| 400      | Error in package which server got(mb wrong url) |
-| 500      | Error on server side                            |
+| **Code** | **Decryption**                                   |
+|----------|--------------------------------------------------|
+| 200      | Success                                          |
+| 400      | Error in package which server got(mb wrong url)  |
+| 500      | Error on server side                             |
+| 600      | Authorization error(token error)                 |
 
 ___
 
