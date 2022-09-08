@@ -60,6 +60,8 @@ class Server:
             self.login_route(package)
         elif package['url'] == '/get_hashes':
             self.get_hashes_route(package=package)
+        elif package['url'] == '/get_file_data':
+            self.get_file_data(pakage=package)
 
     def login_route(self, package: dict):
         """Function of login route"""
@@ -94,3 +96,8 @@ class Server:
                 'root_folder': self.root_folder
             }), encoding='utf-8')
         )
+
+    def get_file_data(self, package: dict):
+        """Function to get file data"""
+
+        pass
