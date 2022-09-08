@@ -99,4 +99,3 @@ class Connection:
             # todo: copy tree from server
         else:
             print(get_file_hashes(self.working_dir, self.root_folder))
-        print(local_structure)

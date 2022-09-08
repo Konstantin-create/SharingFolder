@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da189638-c2fd-48f2-8e84-3a4df0cd3ad8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/SharingFolder.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SharingFolder.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/server/test" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/client/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/app/modules/connection_command.py" beforeDir="false" afterPath="$PROJECT_DIR$/client/app/modules/connection_command.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/server.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/server.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app/modules/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/modules/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/app/tools/file_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/client/app/tools/file_tools.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

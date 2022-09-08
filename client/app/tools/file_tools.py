@@ -29,7 +29,7 @@ def get_all_files(working_dir: str) -> list:
 def get_file_hashes(working_dir: str, folder_name: str) -> list:
     """Function to get file hashes"""
 
-    if is_folder_exists(working_dir, folder_name):
+    if not is_folder_exists(working_dir, folder_name):
         return []
 
     output = []
