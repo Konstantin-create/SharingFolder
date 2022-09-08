@@ -53,7 +53,7 @@ Output data:
 
 ## Storing the current connection
 
-The connection token is stored in the file `app/data/connection/TOKEN`
+The connection token is stored in the field of server class and clent class
 
 <br>
 <br>
